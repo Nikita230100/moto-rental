@@ -1,0 +1,53 @@
+.footer {
+  background-color: #1a1a1a; /* Темный фон как у хедера */
+  color: #ffffff;
+  padding: 2rem 0;
+  text-align: center;
+  border-top: 2px solid #ff4500; /* Оранжевый акцент как в хедере */
+  margin-top: 3rem;
+  position: relative;
+}
+
+.footerText {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.footerText:hover {
+  color: #ff4500;
+  transform: scale(1.05);
+}
+
+.footerText::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ff4500;
+  transition: width 0.3s ease;
+}
+
+.footerText:hover::after {
+  width: 100%;
+}
+
+
+
+/* Медиазапросы для адаптивности */
+@media (max-width: 768px) {
+  .footer {
+    padding: 1.5rem 0;
+  }
+  
+  .footerText {
+    font-size: 1rem;
+  }
+}

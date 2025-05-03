@@ -1,0 +1,97 @@
+.header {
+    background-color: #1a1a1a; 
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid #ff4500; 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .header a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+  }
+  
+  .header a:hover {
+    color: #ff4500;
+    transform: translateY(-2px);
+  }
+  
+  .header a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ff4500;
+    transition: width 0.3s ease;
+  }
+  
+  .header a:hover::after {
+    width: 100%;
+  }
+  
+
+  .header button {
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    margin-left: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+  }
+  
+  .header button:hover {
+    background-color: #e03e00;
+    transform: scale(1.05);
+    box-shadow: 0 2px 5px rgba(255, 69, 0, 0.3);
+  }
+  
+
+  .header a:last-child {
+    color: #ff4500;
+    font-weight: 700;
+    border: 1px solid #ff4500;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+  }
+  
+  .header a:last-child:hover {
+    background-color: rgba(255, 69, 0, 0.1);
+  }
+  
+  
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      padding: 1rem;
+    }
+    
+    .header a {
+      margin: 0.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .header button {
+      margin-top: 1rem;
+    }
+  }
