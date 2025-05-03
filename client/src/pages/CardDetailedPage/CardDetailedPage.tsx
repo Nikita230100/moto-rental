@@ -3,8 +3,9 @@ import { useParams } from "react-router"
 import { CardType } from "../../entities/card/model"
 import { CardApi } from "../../entities/card/api/CardApi"
 import './CardDetailedPage.css'
-
+import Modal from "../../widgets/Modal/Modal"
 export default function CardDetailedPage() {
+    const [isModalOpen, setIsModalOpen] = useState(false)
     const {id} = useParams()
     const [card, setCards] = useState<CardType | null>(null)
     const [isLoading, setIsLoading] = useState(true)
@@ -42,6 +43,11 @@ export default function CardDetailedPage() {
       if (!card) {
         return <div className='not-found'>Тур не найден</div>;
       }
+
+      const handleBookingSubmit = (data: { phone: string; name: string }) => {
+        console.log('Данные для бронирования:', data);
+        alert('Ваша заявка принята! Мы скоро вам перезвоним.');
+      };
   return (
     <div className="card-detailed">
       <div className="card-detailed-img">
@@ -53,9 +59,13 @@ export default function CardDetailedPage() {
         <p className='card-price-detailed'>От {card.price} ₽</p>
         </div>
         <div>
-            <button className="order">
+            <button className="order"  onClick={() => setIsModalOpen(true)}>
                 Забронировать
             </button>
+            <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleBookingSubmit}/>
         </div>
     </div>
   )
