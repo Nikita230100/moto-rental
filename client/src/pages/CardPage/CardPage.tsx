@@ -3,12 +3,16 @@ import { CardType } from "../../entities/card/model"
 import { CardApi } from "../../entities/card/api/CardApi";
 import { AxiosError } from "axios";
 import Card from "../../widgets/Card/Card";
+import './CardPage.css'
+import { UserType } from "../../entities/user/model";
 
-
-export default function CardPage() {
+type Props = {
+  user: UserType | null;
+}
+export default function CardPage({user}: Props) {
     const [cards, setCards] = useState<CardType[]>([])
     const [isLoading, setIsLoading] = useState(true);
-   // const navigate = useNavigate()
+  //  const navigate = useNavigate()
     useEffect(() => {
         const loadData = async () => {
             try {
@@ -55,9 +59,9 @@ export default function CardPage() {
 
   
 
-//   const updateHandler = () => {
-//     navigate(`/update/${channel.id}`)
-//   };
+  // const updateHandler = () => {
+  //   navigate(`/update/${card.id}`)
+  // };
   return (
     <div className="card-page">
       {isLoading ? (
@@ -66,9 +70,10 @@ export default function CardPage() {
         <div className="card-list">
             {cards.map((card) => (
                 <Card key={card.id} card={card}>
-                    <button  type='button' onClick={() => deleteCardHandler(card.id)}>
+                  {user && Number(user.id) === 1 && ( <button  type='button' onClick={() => deleteCardHandler(card.id)}>
                         Удалить
-                    </button>
+                    </button>)}
+                   
                 </Card>
             ))}
         </div>

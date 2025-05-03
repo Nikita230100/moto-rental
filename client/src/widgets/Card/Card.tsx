@@ -2,7 +2,7 @@
 import { Link } from 'react-router';
 import { CardType } from '../../entities/card/model';
 import { CLIENT_ROUTES } from '../../shared/enums/clientRoutes';
-
+import './Card.css'
 type Props ={
     card: CardType;
     children: React.ReactNode;
@@ -18,7 +18,7 @@ const {card, children} = props
         <img src={card.url}/>
         </Link>
         </div>
-        <h3 className='card-title'>Название {card.title}</h3>
+        <h3 className='card-title'>{card.title}</h3>
         <p className='card-description'> {card.description}</p>
         <p className='card-price'>От {card.price} ₽</p>
         {children}

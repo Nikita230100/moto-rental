@@ -9,10 +9,12 @@ import Root from './app/Root';
 import SignUpForm from './features/auth/ui/SignUpForm/SignUpForm';
 import SignInForm from './features/auth/ui/SignInForm/SignInForm';
 import MainPage from './pages/Main/MainPage';
+import CardDetailedPage from './pages/CardDetailedPage/CardDetailedPage';
+
 
 function App() {
   const [user, setUser] = useState<UserType | null>(null);
-
+  
   useEffect(() => {
     UserApi.refreshTokens()
       .then(({ error, data, statusCode }) => {
@@ -36,11 +38,11 @@ function App() {
           path={CLIENT_ROUTES.HOME}
           element={<Root user={user} setUser={setUser} />}
         >
-          <Route index element={<MainPage />} />
-          {/* <Route
-            path={`${CLIENT_ROUTES.TASKS}/:id`}
-            element={<TaskDetailedPage />}
-          /> */}
+          <Route index element={<MainPage user={user} />} />
+          <Route
+            path={`${CLIENT_ROUTES.CARDS}/:id`}
+            element={< CardDetailedPage/>}
+          />
           <Route
             path={CLIENT_ROUTES.SIGNUP}
             element={<SignUpForm setUser={setUser} />}

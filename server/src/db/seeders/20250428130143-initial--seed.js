@@ -43,7 +43,7 @@ module.exports = {
       description: 'Для опытных райдеров: прыжки, крутые виражи и сложные трассы. Полный адреналин!',
       authorId: 1,
       price: 4500,
-      url: 'https://moto-velik.ru/upload/iblock/7a3/7a3b9a0f1d3e5f8e7b6a5d4c3e2f1a0.jpg',
+      url: 'https://static.tildacdn.com/tild6336-6334-4663-a136-663134326366/2024-08-31_04-04-14.png',
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -52,7 +52,7 @@ module.exports = {
       description: 'Уникальный опыт ночного катания с профессиональным инструктором. Оборудование включено.',
       authorId: 1,
       price: 5000,
-      url: 'https://motocross.ru/wp-content/uploads/2022/03/night-ride.jpg',
+      url: 'https://sun1-14.userapi.com/impf/lAL3awNUf2TjzChl-zWFaKBeMy-S-CPYPUa1VA/1FPyNxV_FO0.jpg?size=1920x768&quality=95&crop=0,150,1280,511&sign=4a7598a2215d33ed4b82fab8c47a4809&type=cover_group',
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -61,7 +61,7 @@ module.exports = {
       description: 'Групповой тур по живописным местам с остановками на обед и фотосессии. 8 часов катания.',
       authorId: 1,
       price: 8000,
-      url: 'https://adventure.com/wp-content/uploads/2021/05/moto-group-tour.jpg',
+      url: 'https://motolifeshop.ru/wp-content/uploads/2024/03/23535256.jpg',
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -70,7 +70,7 @@ module.exports = {
       description: 'Персональные занятия с инструктором для быстрого прогресса. Подбор программы под ваш уровень.',
       authorId: 1,
       price: 6000,
-      url: 'https://ridingacademy.com/images/private-lessons.jpg',
+      url: 'https://enduro.blog/wp-content/uploads/2020/03/b95690e3f3f7705cd5dc99747e56aa85-1024x608.jpg',
       createdAt: new Date(),
       updatedAt: new Date()
     }
