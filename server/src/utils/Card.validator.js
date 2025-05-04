@@ -27,12 +27,12 @@ class CardValidator {
     }
 
     // Валидация url
-    if (!url || typeof url !== 'string' || url.trim() === '') {
-      return {
-        isValid: false,
-        error: 'URL is required and must be a non-empty string.',
-      };
-    }
+    // if (!url || typeof url !== 'string' || url.trim() === '') {
+    //   return {
+    //     isValid: false,
+    //     error: 'URL is required and must be a non-empty string.',
+    //   };
+    // }
 
    
 

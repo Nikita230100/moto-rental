@@ -11,7 +11,7 @@ serverConfig(app);
 const PORT = process.env.PORT || 3000; 
 
 app.use('/api', indexRouter); 
-
+app.use('/uploads', express.static('uploads'));
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

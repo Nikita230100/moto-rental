@@ -1,6 +1,6 @@
 import { axiosInstance } from '../../../shared/lib/axiosInstance';
 import { ServerResponseType } from '../../../shared/types';
-import { CardDataType, CardType } from '../model';
+import { CardType } from '../model';
 
 export class CardApi {
   static async getAll(): Promise<ServerResponseType<CardType[]>> {
@@ -13,18 +13,27 @@ export class CardApi {
     return data;
   }
 
-  static async create(
-    inputs: CardDataType
-  ): Promise<ServerResponseType<CardType>> {
-    const { data } = await axiosInstance.post('/cards', inputs);
-    return data;
+  static async create(formData: FormData):Promise<ServerResponseType<CardType>> {
+    const {data} = await axiosInstance.post('/cards', formData, {
+      headers: {
+        'Content-Type':'multipart/form-data'
+      }
+    })
+    return data
   }
+    
+    
+  
 
   static async update(
     id: number,
-    inputs: CardDataType
+    formData: FormData
   ): Promise<ServerResponseType<CardType>> {
-    const { data } = await axiosInstance.put(`/cards/${id}`, inputs);
+    const { data } = await axiosInstance.put(`/cards/${id}`, formData, {
+      headers: {
+       'Content-Type':'multipart/form-data'
+      }
+    });
     return data;
   }
 

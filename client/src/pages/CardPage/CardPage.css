@@ -17,6 +17,11 @@
     gap: 2rem;
     padding: 1rem 0;
   }
+
+  .buttons {
+    display: 'flex';
+    flex-direction: 'column';
+  }
   
   @media (max-width: 768px) {
     .card-list {

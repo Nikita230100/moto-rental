@@ -30,18 +30,26 @@ class CardService {
 
   static async update(id, data) {
     const card = await this.getById(id);
-    if (card.authorId !== 1) {
-      throw new Error('Forbidden: Only admin can update cards');
+    if (!card) {
+        throw new Error('Card not found');
     }
-    if (card) {
-      card.title = data.title;
-      card.description = data.description;
-      card.price = data.price;
-      card.url = data.url;
-      await card.save();
+    
+    // Проверка прав
+    if (card.authorId !== data.authorId) {
+        const error = new Error('Forbidden: Only the author can update this card');
+        error.statusCode = 403;
+        throw error;
     }
-    return card; 
-  }
+    
+    // Обновляем только переданные поля
+    if (data.title) card.title = data.title;
+    if (data.description) card.description = data.description;
+    if (data.price) card.price = data.price;
+    if (data.url) card.url = data.url;
+    
+    await card.save();
+    return card;
+}
 
 
   static async delete(id, userId) {

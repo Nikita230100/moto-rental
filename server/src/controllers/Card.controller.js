@@ -2,6 +2,8 @@ const CardService = require('../services/Card.service');
 const isValidId = require('../utils/isValidId');
 const CardValidator = require('../utils/Card.validator');
 const formatResponse = require('../utils/formatResponse');
+const fs = require('fs');
+const path = require('path');
 
 class CardController {
   static async getAllCards(req, res) {
@@ -47,107 +49,104 @@ class CardController {
   }
 
   static async createCard(req, res) {
-    const { title, description, price, url } = req.body;
-    const { user } = res.locals;
-    if (user.id !== 1) {
-      return res.status(403).json(formatResponse(403, 'Forbidden: Only admin can create cards'));
-    }
-    const { isValid, error } = CardValidator.validate({ 
-      title, 
-      description, 
-      price, 
-      url,
-      authorId: user.id
-    });
-
-    if (!isValid) {
-      return res
-        .status(400)
-        .json(formatResponse(400, 'Validation error', null, error));
-    }
-
     try {
-      const newCard = await CardService.create({ 
-        title, 
-        description, 
-        price, 
-        url, 
-        authorId: user.id 
-      });
+      const { title, description, price,  authorId} = req.body;
+      const imagePath = req.file ? req.file.path : null;
+       // Исправляем путь, заменяя обратные слеши и добавляем полный URL
+       const imageUrl = req.file 
+       ? `${process.env.BASE_URL || 'http://localhost:3000'}/uploads/${req.file.filename}`
+       : null;
+  
+       const cardData = {
+        title,
+        price: parseInt(price),
+        description,
+        authorId: parseInt(authorId),
+          url: imageUrl // Используем полный URL
+      };
+      const card = await CardService.create(cardData);
+      res.status(201).json(formatResponse(201, 'Карточка создана', card));
+    
 
-      if (!newCard) {
-        return res
-          .status(400)
-          .json(formatResponse(400, 'Failed to create new card'));
-      }
+  } catch (error) {
+    res.status(500).json(formatResponse(500, error.message));
+  }
+}
+    
+  
 
-      res.status(201).json(formatResponse(201, 'success', newCard));
-    } catch ({ message }) {
-      console.error(message);
-      res
-        .status(500)
-        .json(formatResponse(500, 'Internal server error', null, message));
-    }
+static async updateCard(req, res) {
+  const { id } = req.params;
+  const { user } = res.locals;
+  const { title, description, price } = req.body;
+  const url = req.body.url || null;
+
+  if (!isValidId(id)) {
+      return res.status(400).json(formatResponse(400, 'Invalid card ID'));
   }
 
-  static async updateCard(req, res) {
-    const { id } = req.params;
-    const { title, description, price, url } = req.body;
-    const { user } = res.locals;
+  try {
+      // Валидация данных
+      const { isValid, error } = CardValidator.validate({
+          title,
+          description,
+          price: Number(price),
+          ...(url && { url }),
+          authorId: user.id
+      });
 
-    if (!isValidId(id)) {
-      return res.status(400).json(formatResponse(400, 'Invalid card ID'));
-    }
+      if (!isValid) {
+          return res.status(400).json(formatResponse(400, 'Validation error', null, error));
+      }
 
-    if (!isValidId(id)) {
-      return res.status(400).json(formatResponse(400, 'Invalid card ID'));
-    }
-
-    const { isValid, error } = CardValidator.validate({ 
-      title, 
-      description, 
-      price, 
-      url,
-      authorId: user.id
-    });
-
-    if (!isValid) {
-      return res
-        .status(400)
-        .json(formatResponse(400, 'Validation error', null, error));
-    }
-
-    try {
-      // Проверяем, существует ли карточка и принадлежит ли пользователю
+      // Получаем текущую карточку
       const existingCard = await CardService.getById(+id);
       if (!existingCard) {
-        return res
-          .status(404)
-          .json(formatResponse(404, `Card with id ${id} not found`));
+          return res.status(404).json(formatResponse(404, `Card with id ${id} not found`));
       }
-      
+
+      // Проверка прав
       if (existingCard.authorId !== user.id) {
-        return res
-          .status(403)
-          .json(formatResponse(403, 'Forbidden: Only the author can update this card'));
+          return res.status(403).json(formatResponse(403, 'Forbidden: Only the author can update this card'));
       }
 
-      const updatedCard = await CardService.update(+id, { 
-        title, 
-        description, 
-        price, 
-        url 
-      });
+      // Подготовка данных для обновления
+      const updateData = {
+          title,
+          description,
+          price: Number(price),
+          ...(url && { url }),
+          authorId: user.id
+      };
 
-      res.status(200).json(formatResponse(200, 'success', updatedCard));
-    } catch ({ message }) {
-      console.error(message);
-      res
-        .status(500)
-        .json(formatResponse(500, 'Internal server error', null, message));
-    }
+      // Обработка нового изображения
+      if (req.file) {
+          // Удаляем старое изображение (если есть и существует)
+          if (existingCard.url) {
+              try {
+                  const oldFilename = existingCard.url.split('/').pop();
+                  const filePath = path.join(__dirname, '../../uploads', oldFilename);
+                  
+                  if (fs.existsSync(filePath)) {
+                      fs.unlinkSync(filePath);
+                  }
+              } catch (err) {
+                  console.error('Error deleting old image:', err);
+                  // Не прерываем выполнение если не удалось удалить старый файл
+              }
+          }
+          updateData.url = `${process.env.BASE_URL || 'http://localhost:3000'}/uploads/${req.file.filename}`;
+      }
+
+      // Обновление карточки
+      const updatedCard = await CardService.update(+id, updateData);
+      return res.status(200).json(formatResponse(200, 'success', updatedCard));
+
+  } catch (error) {
+      console.error('Update card error:', error);
+      return res.status(500).json(formatResponse(500, 'Internal server error', null, error.message));
   }
-
+}
   static async deleteCard(req, res) {
     const { id } = req.params;
     const { user } = res.locals;

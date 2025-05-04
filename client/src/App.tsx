@@ -10,11 +10,13 @@ import SignUpForm from './features/auth/ui/SignUpForm/SignUpForm';
 import SignInForm from './features/auth/ui/SignInForm/SignInForm';
 import MainPage from './pages/Main/MainPage';
 import CardDetailedPage from './pages/CardDetailedPage/CardDetailedPage';
+import LkPage from './pages/LkPage/LkPage';
+import { CardType } from './entities/card/model';
 
 
 function App() {
   const [user, setUser] = useState<UserType | null>(null);
-  
+  const [cards, setCards] = useState<CardType[]>([]);
   useEffect(() => {
     UserApi.refreshTokens()
       .then(({ error, data, statusCode }) => {
@@ -38,7 +40,7 @@ function App() {
           path={CLIENT_ROUTES.HOME}
           element={<Root user={user} setUser={setUser} />}
         >
-          <Route index element={<MainPage user={user} />} />
+          <Route index element={<MainPage user={user} cards={cards} setCards={setCards}/>} />
           <Route
             path={`${CLIENT_ROUTES.CARDS}/:id`}
             element={< CardDetailedPage/>}
@@ -48,8 +50,16 @@ function App() {
             element={<SignUpForm setUser={setUser} />}
           />
           <Route
+            path={CLIENT_ROUTES.LKADMIN}
+            element={<LkPage user={user ? { id: Number(user.id) } : null}  cards={cards} setCards={setCards} />}
+          />
+          <Route
             path={CLIENT_ROUTES.SIGNIN}
             element={<SignInForm setUser={setUser} />}
+          />
+          <Route
+            path={`/update/:cardId`}
+            element={<LkPage user={user ? { id: Number(user.id) } : null}  cards={cards} setCards={setCards} />}
           />
         </Route>
         
