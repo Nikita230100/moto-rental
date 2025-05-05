@@ -50,7 +50,7 @@ function App() {
             element={<SignUpForm setUser={setUser} />}
           />
           <Route
-            path={CLIENT_ROUTES.LKADMIN}
+            path={CLIENT_ROUTES.LK}
             element={<LkPage user={user ? { id: Number(user.id) } : null}  cards={cards} setCards={setCards} />}
           />
           <Route

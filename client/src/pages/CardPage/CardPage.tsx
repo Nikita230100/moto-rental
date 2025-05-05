@@ -11,10 +11,9 @@ type Props = {
   user: UserType | null,
   cards: CardType[] | null,
 setCards: Dispatch<SetStateAction<CardType[]>> | null;
-
 }
-export default function CardPage({user, cards, setCards }: Props) {
-   
+export default function CardPage({user, cards, setCards,  }: Props) {
+
     const [isLoading, setIsLoading] = useState(true);
    const navigate = useNavigate()
     useEffect(() => {
@@ -68,32 +67,37 @@ export default function CardPage({user, cards, setCards }: Props) {
   const updateHandler = (cardId:string) => {
     navigate(`/update/${cardId}`)
   };
+
+ 
   return (
     <div className="card-page">
-      {isLoading ? (
-        <div className="loading">Загрузка...</div>
-      ) : (
-        <div className="card-list">
-            {cards && cards.map((card) => (
-                <Card key={card.id} card={card}>
-                  {user && Number(user.id) === 1 && ( 
-                    <>
-                    <div className="buttons">
-                    <button  type='button' onClick={() => deleteCardHandler(card.id)}>
-                        Удалить
-                    </button>
-                    <button  type='button' onClick={() => updateHandler(card.id)}>
-                    Редактировать
-                </button>
-                </div>
-                </>
-                  )
-                    }
-                   
-                </Card>
-            ))}
-        </div>
-      )}
+        {isLoading ? (
+            <div className="loading">Загрузка...</div>
+        ) : (
+            <div className="card-list">
+                {cards && cards.map((card) => (
+                    <Card 
+                        key={card.id} 
+                        card={card}
+                        user={user ? { id: Number(user.id) } : null}
+    
+                    >
+                        {user && Number(user.id) === 1 && (
+                            <>
+                                <div className="buttons">
+                                    <button className="buttonsDel" type='button' onClick={() => deleteCardHandler(card.id)}>
+                                        Удалить
+                                    </button>
+                                    <button className="buttonsEdit" type='button' onClick={() => updateHandler(card.id)}>
+                                        Редактировать
+                                    </button>
+                                </div>
+                            </>
+                        )}
+                    </Card>
+                ))}
+            </div>
+        )}
     </div>
-  )
+);
 }

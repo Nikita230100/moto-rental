@@ -59,7 +59,7 @@ export default function Header({ user, setUser }: Props) {
       {user && (
         <>
         <NavLink
-        to = {Number(user.id) !== 1 ? CLIENT_ROUTES.LKUSER : CLIENT_ROUTES.LKADMIN}
+        to = {Number(user.id) !== 1 ? CLIENT_ROUTES.LK : CLIENT_ROUTES.LK}
       >
         {user.username}
       </NavLink>

@@ -3,8 +3,7 @@ export enum CLIENT_ROUTES {
     SIGNIN = '/signin',
     SIGNUP = '/signup',
     CARDS = '/cards',
-    LKUSER = '/lk',
-    LKADMIN = '/lkadmin',
+    LK = '/lk',
     AI='/recommend'
 
   }

@@ -10,6 +10,8 @@ type Props ={
 }
 
 export default function MainPage({user, cards, setCards}: Props) {
+
+  
   return (
     <>
     <div className="header">
