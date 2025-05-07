@@ -12,6 +12,7 @@ import MainPage from './pages/Main/MainPage';
 import CardDetailedPage from './pages/CardDetailedPage/CardDetailedPage';
 import LkPage from './pages/LkPage/LkPage';
 import { CardType } from './entities/card/model';
+import AIChat from './features/ai/ui/AiChat/AiChat';
 
 
 function App() {
@@ -56,6 +57,10 @@ function App() {
           <Route
             path={CLIENT_ROUTES.SIGNIN}
             element={<SignInForm setUser={setUser} />}
+          />
+          <Route
+            path={CLIENT_ROUTES.AI}
+            element={<AIChat />}
           />
           <Route
             path={`/update/:cardId`}

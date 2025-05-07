@@ -28,7 +28,7 @@ export default function LkPage({ setCards, cards, user}: Props) {
     try {
       const response = await FavouriteApi.getAll();
       if (response.statusCode === 200 && response.data) {
-        setFavouriteCard(response.data as CardType[])
+        setFavouriteCard(response.data as unknown as CardType[])
       }
     } catch (error) {
       console.error('Error fetching favorites:', error);
