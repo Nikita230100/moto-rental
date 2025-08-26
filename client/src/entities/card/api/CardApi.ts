@@ -13,26 +13,20 @@ export class CardApi {
     return data;
   }
 
-  static async create(formData: FormData):Promise<ServerResponseType<CardType>> {
-    const {data} = await axiosInstance.post('/cards', formData, {
+  static async create(formData: FormData): Promise<ServerResponseType<CardType>> {
+    const { data } = await axiosInstance.post('/cards', formData, {
       headers: {
-        'Content-Type':'multipart/form-data'
-      }
-    })
-    return data
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return data;
   }
-    
-    
-  
 
-  static async update(
-    id: number,
-    formData: FormData
-  ): Promise<ServerResponseType<CardType>> {
+  static async update(id: number, formData: FormData): Promise<ServerResponseType<CardType>> {
     const { data } = await axiosInstance.put(`/cards/${id}`, formData, {
       headers: {
-       'Content-Type':'multipart/form-data'
-      }
+        'Content-Type': 'multipart/form-data',
+      },
     });
     return data;
   }

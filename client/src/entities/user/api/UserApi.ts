@@ -9,15 +9,13 @@ export default class UserApi {
   }
 
   static async signUp(
-    userData: Partial<UserDataType>
+    userData: Partial<UserDataType>,
   ): Promise<ServerResponseType<UserResponseType>> {
     const { data } = await axiosInstance.post('/auth/signUp', userData);
     return data;
   }
 
-  static async signIn(
-    userData: UserDataType
-  ): Promise<ServerResponseType<UserResponseType>> {
+  static async signIn(userData: UserDataType): Promise<ServerResponseType<UserResponseType>> {
     const { data } = await axiosInstance.post('/auth/signIn', userData);
     return data;
   }

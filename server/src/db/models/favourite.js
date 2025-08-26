@@ -1,28 +1,28 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Favourite extends Model {
-   
     static associate({ User, Card }) {
       this.belongsTo(User, {
-        foreignKey: 'userId',  // Поле в Favorite, ссылающееся на User
+        foreignKey: 'userId',
       });
       this.belongsTo(Card, {
-        foreignKey: 'cardId',   // Поле в Favorite, ссылающееся на card
+        foreignKey: 'cardId',
       });
     }
   }
-  Favourite.init({
-    userId: DataTypes.INTEGER,
-    cardId: DataTypes.INTEGER,
-    createdAt: DataTypes.DATE, 
-    updatedAt: DataTypes.DATE  
-  }, {
-    sequelize,
-    modelName: 'Favourite',
-     tableName: 'Favourites'
-  });
+  Favourite.init(
+    {
+      userId: DataTypes.INTEGER,
+      cardId: DataTypes.INTEGER,
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
+    },
+    {
+      sequelize,
+      modelName: 'Favourite',
+      tableName: 'Favourites',
+    },
+  );
   return Favourite;
 };

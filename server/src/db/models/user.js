@@ -5,12 +5,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate({ Card, Favourite }) {
       this.hasMany(Card, { foreignKey: 'authorId' });
 
-    this.belongsToMany(Card, {
-      through: Favourite,   
-      foreignKey: 'userId', 
-    });
+      this.belongsToMany(Card, {
+        through: Favourite,
+        foreignKey: 'userId',
+      });
+    }
   }
-}
   User.init(
     {
       email: DataTypes.STRING,
@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'User',
-       tableName: 'Users'
-    }
+      tableName: 'Users',
+    },
   );
   return User;
 };

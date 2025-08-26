@@ -1,9 +1,9 @@
 .footer {
-  background-color: #1a1a1a; /* Темный фон как у хедера */
+  background-color: #1a1a1a;
   color: #ffffff;
   padding: 2rem 0;
   text-align: center;
-  border-top: 2px solid #ff4500; /* Оранжевый акцент как в хедере */
+  border-top: 2px solid #ff4500;
   margin-top: 3rem;
   position: relative;
 }
@@ -39,14 +39,11 @@
   width: 100%;
 }
 
-
-
-/* Медиазапросы для адаптивности */
 @media (max-width: 768px) {
   .footer {
     padding: 1.5rem 0;
   }
-  
+
   .footerText {
     font-size: 1rem;
   }

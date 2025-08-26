@@ -1,86 +1,84 @@
 .card-page {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .loading {
-    text-align: center;
-    padding: 2rem;
-    font-size: 1.2rem;
-    color: #666;
-  }
-  
-  .card-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    padding: 1rem 0;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.buttonsDel,
+.buttonsEdit {
+  flex: 1;
+  padding: 0.75rem 0;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+}
+
+.buttonsDel {
+  background-color: #ff4500;
+  color: white;
+}
+
+.buttonsDel:hover {
+  background-color: #cc0000;
+}
+
+.buttonsEdit {
+  background-color: #4285f4;
+  color: white;
+}
+
+.buttonsEdit:hover {
+  background-color: #3367d6;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+  .buttons {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
-  .buttons {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    width: 100%;
-  }
-  
   .buttonsDel,
   .buttonsEdit {
-    flex: 1; /* Равная ширина для обеих кнопок */
-    padding: 0.75rem 0;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px; /* Фиксированная высота */
+    width: 100%;
   }
-  
-  .buttonsDel {
-    background-color: #ff4500;
-    color: white;
-  }
-  
-  .buttonsDel:hover {
-    background-color: #cc0000;
-  }
-  
-  .buttonsEdit {
-    background-color: #4285f4;
-    color: white;
-  }
-  
-  .buttonsEdit:hover {
-    background-color: #3367d6;
-  }
-  
+}
 
-  
-  /* Адаптивность */
-  @media (max-width: 480px) {
-    .buttons {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    
-    .buttonsDel,
-    .buttonsEdit {
-      width: 100%;
-    }
+@media (max-width: 768px) {
+  .card-list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
   }
-  
-  @media (max-width: 768px) {
-    .card-list {
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1.5rem;
-    }
-    
-    .card-page {
-      padding: 1rem;
-    }
+
+  .card-page {
+    padding: 1rem;
   }
+}

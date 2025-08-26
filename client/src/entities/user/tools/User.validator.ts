@@ -12,11 +12,7 @@ export default class UserValidator {
     password,
     repeatPassword,
   }: UserDataType): UserValidatorResponse {
-    if (
-      !username ||
-      username.trim().length === 0 ||
-      typeof username !== 'string'
-    ) {
+    if (!username || username.trim().length === 0 || typeof username !== 'string') {
       return {
         isValid: false,
         error: 'Username is required and must non-empty string',
@@ -31,8 +27,7 @@ export default class UserValidator {
     ) {
       return {
         isValid: false,
-        error:
-          'Email is required and must non-empty string and must be valid email',
+        error: 'Email is required and must non-empty string and must be valid email',
       };
     }
 
@@ -62,10 +57,7 @@ export default class UserValidator {
     };
   }
 
-  static validateSignIn({
-    email,
-    password,
-  }: Partial<UserDataType>): UserValidatorResponse {
+  static validateSignIn({ email, password }: Partial<UserDataType>): UserValidatorResponse {
     if (!email || email.trim().length === 0 || typeof email !== 'string') {
       return {
         isValid: false,
@@ -73,11 +65,7 @@ export default class UserValidator {
       };
     }
 
-    if (
-      !password ||
-      password.trim().length === 0 ||
-      typeof password !== 'string'
-    ) {
+    if (!password || password.trim().length === 0 || typeof password !== 'string') {
       return {
         isValid: false,
         error: 'Password is required, must be a non-empty string.',

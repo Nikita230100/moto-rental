@@ -1,9 +1,4 @@
-import axios, {
-  AxiosError,
-  AxiosInstance,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
 interface ExtendedAxiosRequestConfig extends InternalAxiosRequestConfig {
   sent?: boolean;
@@ -26,7 +21,7 @@ axiosInstance.interceptors.request.use(
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
-  }
+  },
 );
 
 axiosInstance.interceptors.response.use(
@@ -51,5 +46,5 @@ axiosInstance.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );

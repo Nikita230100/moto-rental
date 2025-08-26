@@ -1,30 +1,28 @@
-import { FormEvent, useState } from "react";
-import './Modal.css'
+import { FormEvent, useState } from 'react';
+import './Modal.css';
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-    onSubmit: (data: {phone:string; name: string}) => void;
-}
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (data: { phone: string; name: string }) => void;
+};
 
+export default function Modal({ isOpen, onClose, onSubmit }: Props) {
+  const [formData, setFormData] = useState({
+    phone: '',
+    name: '',
+  });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    onSubmit(formData);
+    onClose();
+  };
 
-export default function Modal({isOpen, onClose, onSubmit}: Props) {
-    const [formData, setFormData] = useState({
-        phone: '',
-        name: '',
-    })
-    const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = e.target;
-        setFormData(prev => ({...prev, [name]:value}))
-    }
-
-    const handleSubmit = (e:FormEvent) => {
-        e.preventDefault();
-        onSubmit(formData);
-        onClose();
-    }
-
-    if (!isOpen) return null;
+  if (!isOpen) return null;
 
   return (
     <div className="modal-overlay">
@@ -32,9 +30,9 @@ export default function Modal({isOpen, onClose, onSubmit}: Props) {
         <button className="modal-close" onClick={onClose}>
           &times;
         </button>
-        
+
         <h3>Укажите ваш номер, мы перезвоним вам в ближайшее время</h3>
-        
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="phone">Ваш телефон *</label>
@@ -48,7 +46,7 @@ export default function Modal({isOpen, onClose, onSubmit}: Props) {
               placeholder="+7 (___) ___-__-__"
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="name">Имя</label>
             <input
@@ -60,7 +58,7 @@ export default function Modal({isOpen, onClose, onSubmit}: Props) {
               placeholder="Ваше имя"
             />
           </div>
-          
+
           <button type="submit" className="submit-btn">
             Отправить
           </button>

@@ -34,8 +34,6 @@ class CardValidator {
     //   };
     // }
 
-   
-
     // Валидация authorId
     if (!authorId || typeof authorId !== 'number' || authorId <= 0) {
       return {

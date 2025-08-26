@@ -1,10 +1,6 @@
 class AuthValidator {
   static validateSignUp({ username, email, password }) {
-    if (
-      !username ||
-      username.trim().length === 0 ||
-      typeof username !== 'string'
-    ) {
+    if (!username || username.trim().length === 0 || typeof username !== 'string') {
       return {
         isValid: false,
         error: 'Username is required and must be non empty string',
@@ -19,8 +15,7 @@ class AuthValidator {
     ) {
       return {
         isValid: false,
-        error:
-          'Email is required and must non-empty string and must be valid email',
+        error: 'Email is required and must non-empty string and must be valid email',
       };
     }
 
@@ -51,11 +46,7 @@ class AuthValidator {
       };
     }
 
-    if (
-      !password ||
-      password.trim().length === 0 ||
-      typeof password !== 'string'
-    ) {
+    if (!password || password.trim().length === 0 || typeof password !== 'string') {
       return {
         isValid: false,
         error: 'Password is required, must be a non-empty string',

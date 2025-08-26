@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import { useEffect, useState } from 'react';
+import './App.css';
 import UserApi from './entities/user/api/UserApi';
 import { setAccessToken } from './shared/lib/axiosInstance';
 import { UserType } from './entities/user/model';
@@ -13,7 +13,6 @@ import CardDetailedPage from './pages/CardDetailedPage/CardDetailedPage';
 import LkPage from './pages/LkPage/LkPage';
 import { CardType } from './entities/card/model';
 import AIChat from './features/ai/ui/AiChat/AiChat';
-
 
 function App() {
   const [user, setUser] = useState<UserType | null>(null);
@@ -37,40 +36,36 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path={CLIENT_ROUTES.HOME}
-          element={<Root user={user} setUser={setUser} />}
-        >
-          <Route index element={<MainPage user={user} cards={cards} setCards={setCards}/>} />
-          <Route
-            path={`${CLIENT_ROUTES.CARDS}/:id`}
-            element={< CardDetailedPage/>}
-          />
-          <Route
-            path={CLIENT_ROUTES.SIGNUP}
-            element={<SignUpForm setUser={setUser} />}
-          />
+        <Route path={CLIENT_ROUTES.HOME} element={<Root user={user} setUser={setUser} />}>
+          <Route index element={<MainPage user={user} cards={cards} setCards={setCards} />} />
+          <Route path={`${CLIENT_ROUTES.CARDS}/:id`} element={<CardDetailedPage />} />
+          <Route path={CLIENT_ROUTES.SIGNUP} element={<SignUpForm setUser={setUser} />} />
           <Route
             path={CLIENT_ROUTES.LK}
-            element={<LkPage user={user ? { id: Number(user.id) } : null}  cards={cards} setCards={setCards} />}
+            element={
+              <LkPage
+                user={user ? { id: Number(user.id) } : null}
+                cards={cards}
+                setCards={setCards}
+              />
+            }
           />
-          <Route
-            path={CLIENT_ROUTES.SIGNIN}
-            element={<SignInForm setUser={setUser} />}
-          />
-          <Route
-            path={CLIENT_ROUTES.AI}
-            element={<AIChat />}
-          />
+          <Route path={CLIENT_ROUTES.SIGNIN} element={<SignInForm setUser={setUser} />} />
+          <Route path={CLIENT_ROUTES.AI} element={<AIChat />} />
           <Route
             path={`/update/:cardId`}
-            element={<LkPage user={user ? { id: Number(user.id) } : null}  cards={cards} setCards={setCards} />}
+            element={
+              <LkPage
+                user={user ? { id: Number(user.id) } : null}
+                cards={cards}
+                setCards={setCards}
+              />
+            }
           />
         </Route>
-        
       </Routes>
     </BrowserRouter>
   );
 }
 
-export default App
+export default App;

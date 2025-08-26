@@ -1,22 +1,21 @@
 .header {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-
 .main-page h1 {
-    text-align: center;
-    padding: 2rem 0;
-    color: #333;
-    font-size: 2rem;
-    border-bottom: 2px solid #ff4500;
-    margin: 0 2rem 2rem;
+  text-align: center;
+  padding: 2rem 0;
+  color: #333;
+  font-size: 2rem;
+  border-bottom: 2px solid #ff4500;
+  margin: 0 2rem 2rem;
+}
+
+@media (max-width: 768px) {
+  .main-page h1 {
+    font-size: 1.5rem;
+    padding: 1.5rem 0;
+    margin: 0 1rem 1.5rem;
   }
-  
-  @media (max-width: 768px) {
-    .main-page h1 {
-      font-size: 1.5rem;
-      padding: 1.5rem 0;
-      margin: 0 1rem 1.5rem;
-    }
-  }
+}
